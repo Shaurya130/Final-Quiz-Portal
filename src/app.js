@@ -19,15 +19,17 @@ app.use(cors({
   credentials: true,                 // Allow cookies/sessions
 }));
 
+app.set("trust proxy", 1);
+
 app.use(
   session({
     secret: process.env.SECRET_KEY || "fallback-secret-key",
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: false, 
+      secure: true, 
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: "None",
       maxAge: 5 * 60 * 1000
     }
   })
